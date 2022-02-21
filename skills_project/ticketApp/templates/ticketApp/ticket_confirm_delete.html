@@ -1,0 +1,17 @@
+{% extends "ticketApp/base.html" %}
+{% block content %}
+
+<div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <h2 class="display-6"><br>Are you sure you want to delete the ticket "{{object.title}}?"</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger btn-lg" type="submit">Delete</button>
+                <a class="btn btn-outline-dark btn-lg btn-space ms-3" href="{% url 'ticket-detail' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
