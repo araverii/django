@@ -1,0 +1,22 @@
+{% extends "ticketApp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <h2 class="display-6">
+               <br> Change Profile <br>  </h2>
+                {{ u_form|crispy }}
+
+        </fieldset>
+
+        <div class="form-group">
+                 <h2><br></h2>
+            <button class="btn btn-outline-dark" type="submit">Update</button>
+        </div>
+    </form>
+
+
+</div>
+{% endblock %}
