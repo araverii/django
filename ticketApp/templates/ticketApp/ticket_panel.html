@@ -1,0 +1,38 @@
+{% extends "ticketApp/base.html" %}
+{% block content %}
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+{% if user.is_authenticated %}
+<script type="text/javascript">
+    $(document).ready(function($) {
+        $(".table-row").click(function() {
+            window.document.location = $(this).data("href");
+        });
+    });
+</script>
+<h2 class="display-6"><br>Ticket Panel</h2>
+
+<div class="container">
+    <table class='table table-condensed table-striped table-hover'>
+        <thead class="thead-dark"> <tr><th scope="col">Urgency</th><th scope="col">Title</th><th scope="col">Ticket Type</th><th scope="col">User</th><th scope="col">Date Published</th><th scope="col">Last Updated</th></tr> </thead>
+        <tbody>
+            {% for ticket in tickets %}
+                {% if request.user.is_superuser %}
+                    <tr class="table-row" data-href="ticket/{{ticket.id}}"><td>{{ticket.urgency}}</td><td>{{ticket.title}}</td><td>{{ticket.ticket_type}}</td><td>{{ticket.author}}</td><td>{{ticket.date_posted}}</td><td>{{ticket.date_updated}}</td></tr>
+
+                {% else %}
+                    {% if user.is_authenticated and user == ticket.author %}
+                    <tr class="table-row" data-href="ticket/{{ticket.id}}"><td>{{ticket.urgency}}</td><td>{{ticket.title}}</td><td>{{ticket.ticket_type}}</td><td>{{ticket.author}}</td><td>{{ticket.date_posted}}</td><td>{{ticket.date_updated}}</td></tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<h2 class="display-6"><br>Welcome to ALG Helpdesk</h2>
+<a href="{% url 'login' %}" class="text-decoration-none"> Please login to submit a ticket</a>
+{% endif %}
+{% endblock %}

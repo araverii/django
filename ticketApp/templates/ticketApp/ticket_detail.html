@@ -1,0 +1,24 @@
+{% extends "ticketApp/base.html" %}
+{% block content %}
+<style>
+h5
+{
+  font-family: Helvetica;
+}
+
+</style>
+
+<h2 class="display-6"><br>Ticket Information</h2>
+<h5 style="margin-left: 2.5em"> <br>Title: {{object.title}}</h5>
+<h5 style="margin-left: 2.5em"> <br>User: {{object.author}} </h5>
+<h5 style="margin-left: 2.5em">  <br>Date Submitted: {{object.date_posted}}</h5>
+<h5 style="margin-left: 2.5em">  <br>Last Updated: {{object.date_updated}}</h5>
+<h5 style="margin-left: 2.5em"> <br>Type: {{object.ticket_type}}</h5>
+<h5 style="margin-left: 2.5em"> <br>Urgency: {{object.urgency}}</h5>
+<h5 style="margin-left: 2.5em; word-wrap:break-word;">  <br>Description: {{object.description}} <br><br><br></h5>
+
+{% if user.is_authenticated and user == object.author %}
+    <a href="update/" class="btn btn-dark">Update</a>
+    <a href="delete/" class="btn btn-dark">Delete</a>
+{% endif %}
+{% endblock %}
