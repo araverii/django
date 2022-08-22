@@ -38,10 +38,11 @@
 
                   <a class="nav-item text-light nav-link" href="{% url 'ticket-create' %}">Write a Ticket</a>
                   {% endif %}
-                }
+                <a class="nav-item text-light nav-link " href="https://github.com/rivera-davidkyle/IT-Ticketing-System">Repository</a>
 
                 </div>
                 <div class="navbar-nav ms-auto">
+                    
                     {% if user.is_authenticated %}
                       <a class="nav-item text-light nav-link " href="{% url 'logout' %}">Logout</a>
                     {% else %}
